@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domanda speciale per Vincenzo...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f2fe; /* Azzurro mare chiaro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 450px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #0284c7; /* Blu oceano */
+            font-size: 26px;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            min-height: 150px;
+        }
+
+        button {
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        #btn-yes {
+            background-color: #0ea5e9;
+            color: white;
+            padding: 12px 35px;
+            font-size: 18px;
+        }
+
+        #btn-no {
+            background-color: #ef4444;
+            color: white;
+            padding: 12px 35px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1 id="question">Vincenzo vuoi venire a mare con me domani ?🤍</h1>
+        
+        <div class="buttons">
+            <button id="btn-yes" onclick="celebrate()">SÌ</button>
+            <button id="btn-no" onclick="shrinkNo()">NO</button>
+        </div>
+    </div>
+
+    <script>
+        let yesScale = 1;
+        let noScale = 1;
+        let yesPaddingX = 35;
+        let yesPaddingY = 12;
+        let yesFontSize = 18;
+
+        function shrinkNo() {
+            const btnYes = document.getElementById('btn-yes');
+            const btnNo = document.getElementById('btn-no');
+
+            // Il tasto SÌ cresce ogni volta che si preme NO
+            yesScale += 0.4;
+            yesPaddingX += 15;
+            yesPaddingY += 8;
+            yesFontSize += 5;
+
+            btnYes.style.padding = `${yesPaddingY}px ${yesPaddingX}px`;
+            btnYes.style.fontSize = `${yesFontSize}px`;
+            btnYes.style.borderRadius = `${12 + yesScale * 2}px`;
+
+            // Il tasto NO si rimpicciolisce
+            noScale -= 0.2;
+            if (noScale <= 0.2) {
+                btnNo.style.display = 'none'; // Scompare del tutto se insiste troppo
+            } else {
+                btnNo.style.transform = `scale(${noScale})`;
+            }
+        }
+
+        function celebrate() {
+            const card = document.querySelector('.card');
+            card.innerHTML = `
+                <h1 style="font-size: 30px; color: #0284c7;">Sììì! Prepara il costume! 🌊☀️🏖️</h1>
+                <p style="font-size: 18px; color: #334155;">Non vedo l'ora! 🥰</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>
